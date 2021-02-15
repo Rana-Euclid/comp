@@ -5,7 +5,7 @@ import torch
 
 # Open the video file with cv2
 
-cap = cv2.VideoCapture('sample.mp4')
+cap = cv2.VideoCapture('sample_multi_person.mp4')
 fps = cap.get(cv2.cv2.CAP_PROP_FPS)
 frame_count = 0
 #Initialize the HRNet Model 384X288
