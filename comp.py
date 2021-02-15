@@ -1,6 +1,7 @@
 import cv2
 import time
 from simpleHRNet.SimpleHRNet import SimpleHRNet
+import torch
 
 # Open the video file with cv2
 
@@ -8,7 +9,12 @@ cap = cv2.VideoCapture('sample.mp4')
 fps = cap.get(cv2.cv2.CAP_PROP_FPS)
 frame_count = 0
 #Initialize the HRNet Model 384X288
-model = SimpleHRNet(48, 17, "simpleHRNet/weights/pose_hrnet_w48_384x288.pth")
+model = SimpleHRNet(48, 17, "simpleHRNet/weights/pose_hrnet_w48_384x288.pth", resolution=(384,288), multiperson=True, 
+return_bounding_boxes=True,
+yolo_model_def='simpleHRNet/models/detectors/yolo/config/yolov3.cfg',
+yolo_class_path='simpleHRNet/models/detectors/yolo/data/coco.names', 
+yolo_weights_path='simpleHRNet/models/detectors/yolo/weights/yolov3.weights', 
+device=torch.device('cuda'),)
 
 start_time = time.time()
 
