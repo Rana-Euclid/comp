@@ -7,6 +7,8 @@ from simpleHRNet.SimpleHRNet import SimpleHRNet
 cap = cv2.VideoCapture('sample.mp4')
 fps = cap.get(cv2.cv2.CAP_PROP_FPS)
 frame_count = 0
+#Initialize the HRNet Model 384X288
+model = SimpleHRNet(48, 17, "simpleHRNet/weights/pose_hrnet_w48_384x288.pth")
 
 start_time = time.time()
 
@@ -19,7 +21,7 @@ while(True):
         frame_count+=1
         res = f'{frame.shape[0]}X{frame.shape[1]}'
     # Call skeleton frameworks
-    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    joints = model.predict(frame)
     #Save the frame and the skeletons in the list
     # Display the resulting frame
     cv2.imshow('frame',frame)
